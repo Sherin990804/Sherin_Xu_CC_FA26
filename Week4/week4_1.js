@@ -1,43 +1,47 @@
-let WavesPerCanvas = 10
-let amplitude = 400
-let offset = 0
-let yLoc
-// let wavesPerCanvas = 2：控制频率，表示整个画布横向上完整显示 2 个波浪周期
-// let amplitude = 100：控制振幅，正弦波上下波动的最大高度为 100 像素
-// let offset = 0：波浪的初始相位/偏移量，用来控制波浪左右平移运动
-// let yLoc：声明波浪的 Y 轴基准线位置变量
-
-
 function setup(){
-    createCanvas(windowWidth,windowHeight)
-    noFill()
-    stroke(0)
-    strokeWeight(2)
-    yLoc = height/2
-
+    createCanvas(400,400)
+    noFill();
 }
+
+let i = 0;
 
 function draw(){
 
-    background(230)
+    background(255)
 
-    push()
-    translate(0,yLoc)
+    // yPos = height/2 + noise(n)*200
+    // yPos = height/2 + random(200)
+    // noise() 返回的数值在0 ~ 1之间,x/100变成了 0.01, 0.02, 0.03...，采样点非常密集，生成的波浪平滑自然。
+
+
+    // ellipse(width/2, yPos, 20, 20)
 
     beginShape()
-    for(let i=0; i<width;i++){
 
-        let mappedI = map(i,0,width,0,WavesPerCanvas)
-        let y = sin(mappedI-offset)*amplitude
-        let x = i
-        vertex(x,y)
+    for(let x = 0; x < 100; x++)
+    {
+        let xPos = x*8
+        // 计算当前点的 X 轴坐标。每个点间隔 4 像素
+        let yPos = height/5 + noise(x/100)*50
+        
+
+        let n = x % 2 
+        // 当 x 是偶数时,n = 0; 当 x 是奇数时,n = 1
+        if(n == 0){
+            // yPos = height/4 + random(-50,50)
+            yPos = height/4 + 100 * noise(x/50 + i )
+        }
+
+        else{
+            // yPos = 3*height/4 + random(-50, 50)
+            yPos = height/4 - 100 * noise(x/50 + i)
+        }
+        vertex(xPos,yPos)
+        // 放置顶点
 
     }
-    endShape()   
-    
-    pop()
-    
-    offset = frameCount*0.1
-    // offset += 0.01
 
+    endShape()
+
+    i-=0.01
 }
