@@ -16,8 +16,7 @@ const EMPTY_PHASE = 90;
 const TOTAL_PHASE = RAIN_PHASE + RELEASE_PHASE + EMPTY_PHASE;
 
 async function setup() {
-  colors = await loadJSON(
-  './CC_FA26_Week-7_Assignment/utils/colors.json');
+  colors = await loadJSON('./utils/colors.json');
   createCanvas(canvasW, canvasH);
 
   for (let i = 0; i < rainCount; i++) {
