@@ -16,7 +16,6 @@ function setup() {
 
     }
   }
- 
 }
 
 function draw() {
@@ -35,7 +34,6 @@ function draw() {
       if (d < radius) {
 
         let brightness = map(d, 10, radius, 255, 100)
-
         boxed[index] = max(boxed[index], brightness)
       }
 

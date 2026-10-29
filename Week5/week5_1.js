@@ -6,41 +6,39 @@ let col = 255
 async function setup() {
 
   createCanvas(windowWidth, windowHeight);
-  font= await 
-  loadFont('Academy Engraved LET Fonts.ttf');
+  font= await loadFont('Academy Engraved LET Fonts.ttf');
   //拽一个字体进来
-  textfont(font);
-  textsize(100);
-  textalign(CENTER);
+  textFont(font);
+  textSize(100);
+  textAlign(CENTER);
 
 }
 
 function draw() {
 
-  background(255);
+  background(0);
   fill(col);
-  // fill(255);
   text(student,width/2, height/2);
-
   col *= 0.99
-  // col = col*0.99
+  // col = col*0.99 文字渐隐的效果
  
 } 
 
 function mousePressed() {
-
-  let length = students.length()
-  let i = floor(random(length - 1))
-  // student= students[i];
-  // print(student);
-
-  if(students.length>0){
-    student= students[i];
-    students.splice(i,1);
-    
-  }
-  print(student);
   col = 255
 
+  if(students.length > 0){
 
+  let length = students.length
+  //students.length表示students这个数组的长度
+  let i = floor(random(length))
+  // random(5) 会生成一个从0到5之间的随机小数（不包含5）
+  // floor() 是 p5.js 中的一个数学函数，用于把小数向下取整。
+
+    student= students[i];
+    students.splice(i,1);
+    // 删除已经抽取的数字
+    print(student);
+    
+  }
 }
